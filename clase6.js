@@ -342,3 +342,162 @@ function crearImpresoraDeMensajesEstilos(tipoMensaje, estilos) {
 const estiloAplicado = 'background: green; color: white; font-size: 20px; font-weight: 600; padding-left:0.5rem;margin-left:0;';
 const imprimirEstilo = crearImpresoraDeMensajesEstilos('Estilos CSS', estiloAplicado );
 imprimirEstilo('Atención: la aplicacion de un estilo es inminente!')
+
+
+
+
+/// ****** Programacion Orientada a Objetos /////
+
+/* En la poo el paradigma es pensar en herencia.
+Con la programacion funcional el enfoque es de composicion
+es decir dividir las funcionalidades del programa que 
+deseamos escribir, y cada una de esas pequeñas funcionalidades
+se escribe la logica correspondiente dentro de una funcion, y
+reutilizar la logica tantas veces como sea posible.
+Es decir crear de lo chiquito algo grande, es decir, un programa.
+Hago una funcion para login, para validar un password, para saber
+en que parte de la pagina estoy y asi mostrar una vista distinta. 
+Una funcion la autenticacion de un token para una base de datos, etc.
+
+La lógica de la programacion orientadas a objetos es distinta, 
+no tiene que ver con componer, sino con heredar. No voy de lo particular
+a lo general como era con la programacion funcional (composicion).
+Voy de lo general a lo particular. Comienzo desde un zoologico y voy a cada
+animal. ¿Que tienen en comun los animales? son seres vivos. Los animales
+van a heredar que son seres vivos. Los felinos heredan que son seres vivos
+y los animales felinos heredaran los felinos (que son seres vivos).
+Y asi desde lo general a lo particular o sea seres vivos, felinos, gato.
+
+La programacion orientada a objetos es un modelo de programacion
+informatica que organiza el diseño de software en torno a datos u
+objetos, en lugar de funciones y logica. Se centra en los objetos
+que los desarrolladores quieren manipular en lugar
+de enfocarse en la logica necesaria para manipularlos.
+Este enfoque de programacion es adecuado para programas
+que son grandes, complejos y se actualizan o mantienen
+activamente.
+
+JS no es un lenguaje propiamente orientados a objetos como 
+java c++. JS tiene orientacion para la programacion funcional.
+¿Como trabajar con POO en un lenguaje que no fue diseñado para
+esto? Solucion: Prototipo.
+object.prototype --> objeto padre
+permite trabajar con los objetos, con sus propiedades y sus metodos
+.length, .map, .reduce provienen de un object.prototype.
+
+String.length -> en tiempo de ejecucion JS envuelve el string y 
+se comporta como un objeto.
+
+JS es a menudo descrito como un lenguaje basado
+en prototipos - para proporcionar mecanismos de 
+herencia, los objetos pueden tener un objeto
+prototipo, el cual actua como un objeto plantilla
+que hereda metodos y propiedades.
+
+ejemplo:*/
+const array = [1,2,3];
+const string = 'hola';
+
+console.log(array); //muestra como objeto
+console.log(string.length); // no lo muestra
+// como objeto aunque se configura como tal
+// no se muestra el prototype
+
+// para ver un string como objeto
+const string2 = new String('Adios');
+console.log(string2);
+//Js crea una instancia de una funcion 
+// constructora (con new)
+
+//utilizar this apunta al objeto que hace referencia al
+// objeto que estamos trabajando, por medio de this se puede
+// invocar propiedades y metodos del objeto apuntado
+// tener en cuenta los scopes en JS
+
+// EJ:
+// for(let i = 0; i < this.length; i++) ..
+// profesores.filter(dskfjasldfjl);  profesores es un array
+
+//this apunta a profesores
+
+//para ver el objeto dom y todo lo referido al navegador
+console.log(this);
+
+// se puede agregar una nueva propiedad al objeto window
+// mediante this
+this.nombre='bienvenido al objeto window (propiedad agregada)';
+console.log(this.nombre);
+
+// llamando al mismo objeto dentro del scope usando this
+const objetoThis1 = {
+    // propiedad
+    nombre: 'Contexto del Objeto objetoThis1',
+    // metodo
+    imprimir: function () {
+        console.log(this.nombre);
+    }
+}
+objetoThis1.imprimir();
+console.log(objetoThis1.nombre); //se puede acceder directamente
+                                // desde afuera del scope
+
+const objetoThis2 = {
+    nombre: 'Contexto del Objeto objetoThis2',
+    imprimir: objetoThis1.imprimir,
+}
+
+/// que pasara? imprime objetoThis1 u objetoThis2?
+// imprime objetoThis2 porque llama a la funcion imprimir del 
+// objeto this1, pero como hace referencia a this.nombre en objeto1
+// y me estoy trayendo la funcion entera a objeto dos (como copiar y pegar)
+// entonces al ejecutar ese this hara referencia al objeto destino y no
+// al objeto origen
+objetoThis2.imprimir(); 
+
+
+// Funcion constructora
+
+/* La funcion constructora es la version de JS de una clase.
+Notarás que tiene todas las características que esperas en 
+una funcion, aunque no devuelve nada o crea explícitamente
+un objeto -básicamente sólo define propiedades y métodos.
+Para declarar una funcion constructora se crea la funcion igual que 
+cualquier otra funcion y después se crea un objeto utilizando la 
+palabra clave "new" lo cual indica que la función original es 
+una funcion constructora
+
+Como los closures que son funciones que crean funciones
+puedo usar funciones constructoras para crear objetos
+se pueden pasar parametros por ej el nombre, color */
+
+//funcion constructora nombre en mayúsculas
+function Jedi(nombre, color) {
+    // propiedades
+    this.arma='Sable de luz';
+    this.colorSableLuz=color;
+    this.poder='La fuerza';
+    this.nombre = nombre;
+    // metodo
+    this.hablar = function() {
+        console.log(`${this.nombre}: Que la fuerza te acompañe!.`);
+    }
+}
+
+//creacion de una instancia
+let j = new Jedi();
+
+// imprimir en la consola
+console.log(j);
+j.arma='pistola laser';
+console.log(j);
+console.log('no se tiene acceso a la funcion padre en forma directa');
+console.log(Jedi.arma)
+
+// se aplica la herencia de los valores fijos de la funcion
+// constructora y paso los parámetros de lo que varia.
+let yoda = new Jedi('Yoda', 'Verde');
+console.log(yoda);
+yoda.hablar();
+let obiWan = new Jedi('Obi Wan', 'Azul');
+console.log(obiWan);
+obiWan.hablar();

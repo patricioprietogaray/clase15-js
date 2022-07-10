@@ -32,8 +32,35 @@ activamente.
 JS no es un lenguaje propiamente orientados a objetos como 
 java c++. JS tiene orientacion para la programacion funcional.
 ¿Como trabajar con POO en un lenguaje que no fue diseñado para
-esto? 1:37
+esto? Solucion: Prototipo.
+object.prototype --> objeto padre
+permite trabajar con los objetos, con sus propiedades y sus metodos
+.length, .map, .reduce provienen de un object.prototype.
 
+String.length -> en tiempo de ejecucion JS envuelve el string y 
+se comporta como un objeto.
 
+JS es a menudo descrito como un lenguaje basado
+en prototipos - para proporcionar mecanismos de 
+herencia, los objetos pueden tener un objeto
+prototipo, el cual actua como un objeto plantilla
+que hereda metodos y propiedades.
 
-*/
+ejemplo:*/
+const array = [1,2,3];
+const string = 'hola';
+
+console.log(array); //muestra como objeto
+console.log(string.length); // no lo muestra
+// como objeto aunque se configura como tal
+// no se muestra el prototype
+
+// para ver un string como objeto
+const string2 = new String('Adios');
+console.log(string2);
+//Js crea una instancia de una funcion 
+// constructora (con new)
+
+1:43
+
+String.length

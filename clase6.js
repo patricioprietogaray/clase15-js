@@ -471,7 +471,7 @@ puedo usar funciones constructoras para crear objetos
 se pueden pasar parametros por ej el nombre, color */
 
 //funcion constructora nombre en mayúsculas
-function Jedi(nombre, color) {
+function Jedi(nombre, color) { //parametros dinámicos
     // propiedades
     this.arma='Sable de luz';
     this.colorSableLuz=color;
